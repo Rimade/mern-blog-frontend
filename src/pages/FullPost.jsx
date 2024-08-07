@@ -1,32 +1,32 @@
-import React, { useEffect, useState } from 'react'
-import ReactMarkdown from 'react-markdown'
+import React, { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 
-import { Post } from '../components/Post'
-import { Index } from '../components/AddComment'
-import { CommentsBlock } from '../components/CommentsBlock'
-import { useParams } from 'react-router-dom'
-import axios from '../axios'
+import { Post } from '../components/Post';
+import { AddComment, Index } from '../components/AddComment';
+import { CommentsBlock } from '../components/CommentsBlock';
+import { useParams } from 'react-router-dom';
+import axios from '../axios';
 
 export const FullPost = () => {
-	const [data, setData] = useState()
-	const [isLoading, setIsLoading] = useState(true)
-	const { id } = useParams()
+	const [data, setData] = useState();
+	const [isLoading, setIsLoading] = useState(true);
+	const { id } = useParams();
 
 	useEffect(() => {
 		axios
 			.get(`/posts/${id}`)
 			.then((res) => {
-				setData(res.data)
-				setIsLoading(false)
+				setData(res.data);
+				setIsLoading(false);
 			})
 			.catch((error) => {
-				console.warn(error)
-				alert('Ошибка при получении статьи')
-			})
-	}, [])
+				console.warn(error);
+				alert('Ошибка при получении статьи');
+			});
+	}, []);
 
 	if (isLoading) {
-		return <Post isLoading={isLoading} isFullPost />
+		return <Post isLoading={isLoading} isFullPost />;
 	}
 
 	return (
@@ -40,8 +40,7 @@ export const FullPost = () => {
 				viewsCount={data.viewsCount}
 				commentsCount={3}
 				tags={data.tags}
-				isFullPost
-			>
+				isFullPost>
 				<ReactMarkdown children={data.text} />
 			</Post>
 			<CommentsBlock
@@ -61,10 +60,9 @@ export const FullPost = () => {
 						text: 'When displaying three lines or more, the avatar is not aligned at the top. You should set the prop to align the avatar at the top',
 					},
 				]}
-				isLoading={false}
-			>
-				<Index />
+				isLoading={false}>
+				<AddComment />
 			</CommentsBlock>
 		</>
-	)
-}
+	);
+};
