@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 
 import { Post } from '../components/Post';
-import { AddComment, Index } from '../components/AddComment';
+import { AddComment } from '../components/AddComment';
 import { CommentsBlock } from '../components/CommentsBlock';
 import { useParams } from 'react-router-dom';
 import axios from '../axios';
@@ -29,6 +29,8 @@ export const FullPost = () => {
 		return <Post isLoading={isLoading} isFullPost />;
 	}
 
+	console.log(data);
+
 	return (
 		<>
 			<Post
@@ -36,6 +38,11 @@ export const FullPost = () => {
 				title={data.title}
 				imageUrl={data.imageUrl ? `http://localhost:4444${data.imageUrl}` : ''}
 				user={data.user}
+				avatarUrl={
+					data.user.avatarUrl
+						? `http://localhost:4444${data.user.avatarUrl}`
+						: ''
+				}
 				createdAt={data.createdAt}
 				viewsCount={data.viewsCount}
 				commentsCount={3}

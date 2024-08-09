@@ -18,6 +18,7 @@ export const Post = ({
 	title,
 	createdAt,
 	imageUrl,
+	avatarUrl,
 	user,
 	viewsCount,
 	commentsCount,
@@ -61,7 +62,7 @@ export const Post = ({
 				/>
 			)}
 			<div className={styles.wrapper}>
-				<UserInfo {...user} additionalText={createdAt} />
+				<UserInfo {...user} avatarUrl={avatarUrl} additionalText={createdAt} />
 				<div className={styles.indention}>
 					<h2
 						className={clsx(styles.title, { [styles.titleFull]: isFullPost })}>
